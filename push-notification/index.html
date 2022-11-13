@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Push Notification</title>
+    <button id="button">Click Me</button>
+</head>
+<body>
+    <script>
+    
+        function showNotification(){
+            const notification = new Notification("New message from Chirantan Banik", {
+                body: "Hey people whatsupp? Connect with me of Instagram.",
+                icon: "https://res.cloudinary.com/practicaldev/image/fetch/s--_5tSeXV5--/c_fill,f_auto,fl_progressive,h_320,q_auto,w_320/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/769512/54debd20-b315-45c1-ac4b-838fcac095a5.jpg"
+
+            });
+
+            notification.onclick = (e) => {
+                window.location.href = "https://www.instagram.com/banik_chirantan/";
+            }
+        }
+
+
+
+    // whether the user has granted permission to show the notification the values can be granted, denied or default
+
+    const button = document.querySelector("button")
+
+button.addEventListener("click", () =>{
+    console.log(Notification.permission);
+
+    if(Notification.permission === "granted"){
+        showNotification();
+    }  else  if(Notification.permission !== "denied"){
+        Notification.requestPermission().then(permission => {
+            if(permission === "granted"){
+                showNotification();
+
+            }
+            
+        });
+    }
+})
+    </script>
+    <link rel="stylesheet" href="style.css">
+</body>
+</html>
